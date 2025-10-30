@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Transcript Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand': {
+                'primary': '#6366F1', // Indigo 500
+                'secondary': '#818CF8', // Indigo 400
+              },
+              'dark': {
+                '900': '#0F172A', // Slate 900
+                '800': '#1E293B', // Slate 800
+                '700': '#334155', // Slate 700
+                '600': '#475569', // Slate 600
+              }
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "youtube-player/": "https://aistudiocdn.com/youtube-player@^5.6.0/"
+  }
+}
+</script>
+</head>
+  <body class="bg-dark-900 text-slate-200">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+  </body>
+</html>

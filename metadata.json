@@ -1,0 +1,5 @@
+{
+  "name": "YouTube Transcript Tool",
+  "description": "A web-based tool to retrieve, edit, translate, and analyze YouTube video transcripts. It features an embedded video player synchronized with the transcript, AI-powered analysis via Gemini, and supports over 125 languages.",
+  "requestFramePermissions": []
+}
