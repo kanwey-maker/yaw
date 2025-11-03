@@ -1,23 +1,27 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-// Ensure the API key is available from environment variables
-const apiKey = process.env.API_KEY;
-if (!apiKey) {
-    console.error("API_KEY environment variable not set.");
+// Lazily initialize the GoogleGenAI client to prevent startup crashes
+// in environments where process.env might not be immediately available.
+let ai: GoogleGenAI | null = null;
+
+function getAiInstance(): GoogleGenAI {
+    if (!ai) {
+        const apiKey = process.env.API_KEY;
+        if (!apiKey) {
+            throw new Error("Gemini API key is not configured.");
+        }
+        ai = new GoogleGenAI({ apiKey });
+    }
+    return ai;
 }
 
-const ai = new GoogleGenAI({ apiKey: apiKey! });
-
 export const runAIPrompt = async (prompt: string, transcriptText: string): Promise<string> => {
-    if (!apiKey) {
-        throw new Error("Gemini API key is not configured.");
-    }
-    
     const fullPrompt = `${prompt}\n\nHere is the transcript:\n---\n${transcriptText}`;
     
     try {
-        const response = await ai.models.generateContent({
+        const aiInstance = getAiInstance();
+        const response = await aiInstance.models.generateContent({
             model: 'gemini-2.5-flash',
             contents: fullPrompt,
         });
